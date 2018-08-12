@@ -24,13 +24,13 @@ AddEventHandler("blanchisseur:BlanchirCash", function(amount)
 	local amount = amount
 
 	if (dirtyMoney <= 0) then
-		TriggerClientEvent("esx:showNotification", source, "~y~You do not have money to launder.")
+		TriggerClientEvent("esx:showNotification", source, "~y~Tu n'a pas d'argent à blanchir.")
 	else
 		local washedMoney = amount * tax
 		local total = money + washedMoney
 		local totald = dirtyMoney - amount
 		xPlayer.setMoney(total)
 		xPlayer.setAccountMoney('black_money', totald)
-		TriggerClientEvent("esx:showNotification", source, "You have laundered ~r~$".. tonumber(amount) .."~s~ dirty money.~s~ Now you have ~g~$".. tonumber(total) .."~w~ at your pocket.")
+		TriggerClientEvent("esx:showNotification", source, "Vous avez blanchi ~r~$".. tonumber(amount) .."~s~ d'argent sale.~s~ Vous avez maintenant ~g~$".. tonumber(total) ..".")
 	end
 end)

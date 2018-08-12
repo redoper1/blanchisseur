@@ -21,7 +21,7 @@ local showBlip = true
 local maxDirty = 100000
 local openKey = 51
 local emplacement = {
-{name="Money laundry", id=500, colour=75, x=1269.73, y=-1710.25, z=54.7715},
+{name="Blanchisserie", id=500, colour=75, x=1269.73, y=-1710.25, z=54.7715},
 }
 local options = {
     x = 0.1,
@@ -30,7 +30,7 @@ local options = {
     height = 0.04,
     scale = 0.4,
     font = 0,
-    menu_title = "Money laundry",
+    menu_title = "Blanchisserie",
     menu_subtitle = "Menu",
     color_r = 255,
     color_g = 10,
@@ -64,7 +64,7 @@ Citizen.CreateThread(
 			if (Vdist(playerPos.x, playerPos.y, playerPos.z, x, y, z) < 100.0) then
 				DrawMarker(0, x, y, z - 1, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.0001, 255, 10, 10,165, 0, 0, 0,0)
 				if (Vdist(playerPos.x, playerPos.y, playerPos.z, x, y, z) < 4.0) then
-					DisplayHelpText('Press ~INPUT_CONTEXT~ to ~g~launder~s~ your ~r~dirty money')
+					DisplayHelpText('Appuyez sur ~INPUT_CONTEXT~ pour ~g~blanchir~s~ votre ~r~argent sale')
 					if (IsControlJustReleased(1, openKey)) then
 						LaundryMoneyMenu()
 						Menu.hidden = not Menu.hidden
@@ -92,10 +92,10 @@ end
 ---------------------
 ---- Menu
 function LaundryMoneyMenu()
-   options.menu_subtitle = "Money laundry"
+   options.menu_subtitle = "Blanchisserie"
     ClearMenu()
-	Menu.addButton("Launder the money", "LaundryMoney", -1)
-	Menu.addButton("Close the menu", "CloseMenu", nil)
+	Menu.addButton("Blanchir", "LaundryMoney", -1)
+	Menu.addButton("Fermer", "CloseMenu", nil)
 end
 
 function CloseMenu()
@@ -114,14 +114,14 @@ function LaundryMoney(amount)
 				if(res ~= nil and res ~= 0 and res <= maxDirty) then
 					amount = res
                 else
-                 ESX.ShowNotification("~r~You can not launder that much at once! Maximum at once is $"..maxDirty)
+                 ESX.ShowNotification("~r~Vous ne pouvez pas laver autant à la fois! Maximum à la fois est de $"..maxDirty)
 				end
 			end
 		end
 		if(amount ~= -1 and amount ~= nil) then
 			TriggerServerEvent("blanchisseur:BlanchirCash", tonumber(amount))
 		elseif (amount == nil) then
-			ESX.ShowNotification('~h~~r~ERROR:~nrt~ amount to launder is NIL!!!')
+			ESX.ShowNotification('~h~~r~ERREUR:~nrt~ Le montant à laver est NIL!!!')
 		end
 end
 -----------------
